@@ -1,0 +1,59 @@
+@import "_normalize.scss";
+
+$body-color: #f1f1f1;
+
+body {
+  background-color: $body-color;
+}
+
+.wrapper {
+  text-align: center;
+  width: 555px;
+  margin: 0 auto;
+}
+
+.header {
+  margin: 0 auto;
+}
+
+.game-field {
+  width: 240px;
+  height: 240px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.puzzle {
+  width: 80px;
+  height: 80px;
+  padding-top: 25px;
+  background-color: #a1a1a1;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 25px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: green;
+    ;
+  }
+}
+
+.timer {
+
+  width: 150px;
+  height: 40px;
+  margin: 20px auto;
+  background-color: greenyellow;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
+
+.empty {
+  &:hover {
+    cursor: pointer;
+    background-color: #a1a1a1;
+  }
+}

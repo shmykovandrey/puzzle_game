@@ -1,7 +1,6 @@
-document.title = 'Puzzle Game';
+import './style/style.scss';
 
-const header = document.createElement('h1');
+import Game from './scripts/Game';
 
-header.textContent = 'Hehehe';
-
-document.body.appendChild(header);
+const game = new Game();
+game.generateGameField();
