@@ -47,27 +47,35 @@ export default class GameField {
       this.clickNumber += 1;
       const nullElem = this.findElem(0);
       const targetElem = this.findElem(event.target.textContent);
+      console.log(this.gameField);
       this.swapPuzzle(nullElem, targetElem);
       //   this.findNeighbour();
       //   this.logField();
-      //   this.drowField();
+      this.drowField();
     }
   }
 
   /* eslint-disable class-methods-use-this */
   swapPuzzle(puzzle1, puzzle2) {
-    console.log(this.gameField);
+    console.log(puzzle1, puzzle2);
+    let puz1Index = 0;
+    let puz2Index = 0;
+    for (let i = 0; i < this.size ** 2; i += 1) {
+      if (this.gameField[i] === puzzle1) puz1Index = i;
+      if (this.gameField[i] === puzzle2) puz2Index = i;
+    }
+    this.gameField.splice(puz1Index, 1, puzzle2);
+    this.gameField.splice(puz2Index, 1, puzzle1);
 
-    this.gameField.forEach((elem, i) => {
-      if (elem === puzzle1) {
-        this.gameField.splice(i, 1, puzzle2);
-        console.log(this.gameField);
-      }
-      if (elem === puzzle2) {
-        this.gameField.splice(i, 1, puzzle1);
-        console.log(this.gameField);
-      }
-    });
+    // this.gameField.forEach((elem, i) => {
+    //   if (elem === puzzle1) {
+    //     this.gameField.splice(i, 1, '0');
+    //     console.log(this.gameField);
+    //   } else if (elem === puzzle2) {
+    //     this.gameField.splice(i, 1, `${puzzle2.value}`);
+    //     console.log(this.gameField);
+    //   }
+    // });
     // this.gameField.sort((a, b) => a.index - b.index);
     // this.gameField.forEach((elem) => elem.setPosition());
     // const { index } = puzzle1;
