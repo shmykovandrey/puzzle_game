@@ -32,16 +32,9 @@ body {
   text-align: center;
   border: 1px solid black;
   font-size: 25px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: green;
-    ;
-  }
 }
 
 .timer {
-
   width: 150px;
   height: 40px;
   margin: 20px auto;
@@ -50,10 +43,20 @@ body {
   font-size: 20px;
 }
 
+.canMove {
 
-.empty {
   &:hover {
     cursor: pointer;
+    background-color: green;
+    ;
+  }
+}
+
+.empty {
+  color: #a1a1a1;
+
+  &:hover {
+    cursor: default;
     background-color: #a1a1a1;
   }
 }

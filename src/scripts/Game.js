@@ -5,6 +5,7 @@ export default class Game {
     this.time = 0;
     this.turn = 0;
     this.size = size;
+    this.updateTimer();
   }
 
   generateGameField() {
