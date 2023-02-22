@@ -43,6 +43,15 @@ body {
   font-size: 20px;
 }
 
+.clickNumber {
+  width: 150px;
+  height: 40px;
+  margin: 20px auto;
+  background-color: greenyellow;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
 .canMove {
 
   &:hover {

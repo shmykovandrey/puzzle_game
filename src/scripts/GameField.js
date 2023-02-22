@@ -3,9 +3,9 @@ import Puzzle from './Puzzle';
 export default class GameField {
   constructor(size) {
     this.size = size;
+    this.clickNumber = 0;
     this.generateField();
     this.findNeighbour();
-    this.logField();
     this.drowField();
   }
 
@@ -27,6 +27,9 @@ export default class GameField {
 
   drowField() {
     const gameFieldTag = document.querySelector('.game-field');
+    gameFieldTag.addEventListener('click', (e) => {
+      this.clickOnField(e);
+    });
     gameFieldTag.innerHTML = '';
     for (let i = 0; i < this.size ** 2; i += 1) {
       const divPuzzle = document.createElement('div');
@@ -38,9 +41,47 @@ export default class GameField {
     }
   }
 
-  findNeighbour() {
-    const [k1, k2] = this.findNullIndex();
+  clickOnField(event) {
+    if (event.target.classList.value.split(' ').indexOf('canMove') !== -1) {
+      /* eslint-disable no-console */
+      this.clickNumber += 1;
+      const nullElem = this.findElem(0);
+      const targetElem = this.findElem(event.target.textContent);
+      this.swapPuzzle(nullElem, targetElem);
+      //   this.findNeighbour();
+      //   this.logField();
+      //   this.drowField();
+    }
+  }
 
+  /* eslint-disable class-methods-use-this */
+  swapPuzzle(puzzle1, puzzle2) {
+    console.log(this.gameField);
+
+    this.gameField.forEach((elem, i) => {
+      if (elem === puzzle1) {
+        this.gameField.splice(i, 1, puzzle2);
+        console.log(this.gameField);
+      }
+      if (elem === puzzle2) {
+        this.gameField.splice(i, 1, puzzle1);
+        console.log(this.gameField);
+      }
+    });
+    // this.gameField.sort((a, b) => a.index - b.index);
+    // this.gameField.forEach((elem) => elem.setPosition());
+    // const { index } = puzzle1;
+    // const { value } = puzzle1;
+    // /* eslint-disable no-param-reassign */
+    // puzzle1.index = puzzle2.index;
+    // puzzle1.value = puzzle2.value;
+    // puzzle2.index = index;
+    // puzzle2.value = value;
+  }
+
+  findNeighbour() {
+    const [k1, k2] = this.findElem(0).position;
+    // console.log(k1, k2);
     if (k1 === 0) {
       this.changeMoveble(k1 + 1, k2);
     }
@@ -72,11 +113,10 @@ export default class GameField {
     }
   }
 
-  findNullIndex() {
+  findElem(value = 0) {
     for (let i = 0; i < this.size ** 2; i += 1) {
-      if (this.gameField[i].value === 0) {
-        const [k1, k2] = this.gameField[i].position;
-        return [k1, k2];
+      if (this.gameField[i].value === +value) {
+        return this.gameField[i];
       }
     }
     return null;

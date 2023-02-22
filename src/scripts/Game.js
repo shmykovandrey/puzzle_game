@@ -6,6 +6,7 @@ export default class Game {
     this.turn = 0;
     this.size = size;
     this.updateTimer();
+    this.startDrowClickNumber();
   }
 
   generateGameField() {
@@ -23,5 +24,16 @@ export default class Game {
   updateTimer() {
     const timer = document.querySelector('.timer');
     timer.textContent = `Time: ${this.time} sec`;
+  }
+
+  drowClickNumber() {
+    const clickNumberField = document.querySelector('.clickNumber');
+    clickNumberField.textContent = `Move: ${this.game.clickNumber}`;
+  }
+
+  startDrowClickNumber() {
+    setInterval(() => {
+      this.drowClickNumber();
+    }, 100);
   }
 }

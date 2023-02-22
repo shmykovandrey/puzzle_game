@@ -4,11 +4,11 @@ export default class Puzzle {
     this.index = index;
     this.value = value;
     this.isMoveble = false;
-    this.position = this.getPosition();
+    this.setPosition();
   }
 
-  getPosition() {
-    return [Math.floor(this.index / this.fieldSize), this.index % this.fieldSize];
+  setPosition() {
+    this.position = [Math.floor(this.index / this.fieldSize), this.index % this.fieldSize];
   }
 
   loger() {
