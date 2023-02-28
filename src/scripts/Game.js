@@ -5,6 +5,7 @@ export default class Game {
     this.time = 0;
     this.turn = 0;
     this.size = size;
+    this.setGameType();
     this.updateTimer();
     this.startDrowClickNumber();
   }
@@ -35,5 +36,27 @@ export default class Game {
     setInterval(() => {
       this.drowClickNumber();
     }, 100);
+  }
+
+  setGameType() {
+    const setTimeTag = document.querySelector('.game-title');
+    setTimeTag.textContent = `Game Type ${this.size}x${this.size}`;
+    const selectGameType = document.querySelector('.game__type');
+    selectGameType.addEventListener('click', (e) => {
+      Game.gameSelection(e);
+    });
+  }
+  /* eslint-disable no-console */
+
+  static gameSelection(event) {
+    if (event.target.textContent[0] === '3') {
+      console.log('3');
+    }
+    if (event.target.textContent[0] === '4') {
+      console.log('4');
+    }
+    if (event.target.textContent[0] === '5') {
+      console.log('5');
+    }
   }
 }

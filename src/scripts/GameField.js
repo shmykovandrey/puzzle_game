@@ -4,6 +4,7 @@ export default class GameField {
   constructor(size) {
     this.size = size;
     this.clickNumber = 0;
+    this.addClickEvent();
     this.generateField();
     this.findNeighbour();
     this.drowField();
@@ -11,8 +12,9 @@ export default class GameField {
 
   mixedData() {
     let res = [];
-    if (this.size === 3) res = [0, 1, 2, 3, 4, 5, 6, 7, 8].sort(() => Math.random() - 0.5);
-    return res;
+    if (this.size === 3) res = [1, 2, 3, 4, 5, 6, 7, 8].sort(() => Math.random() - 0.5);
+    res.push(0);
+    return res.reverse();
   }
 
   generateField() {
@@ -25,11 +27,15 @@ export default class GameField {
     this.gameField = arr;
   }
 
-  drowField() {
+  addClickEvent() {
     const gameFieldTag = document.querySelector('.game-field');
     gameFieldTag.addEventListener('click', (e) => {
       this.clickOnField(e);
     });
+  }
+
+  drowField() {
+    const gameFieldTag = document.querySelector('.game-field');
     gameFieldTag.innerHTML = '';
     for (let i = 0; i < this.size ** 2; i += 1) {
       const divPuzzle = document.createElement('div');
@@ -49,7 +55,7 @@ export default class GameField {
       const targetElem = this.findElem(event.target.textContent);
       console.log(this.gameField);
       this.swapPuzzle(nullElem, targetElem);
-      //   this.findNeighbour();
+      this.findNeighbour();
       //   this.logField();
       this.drowField();
     }
@@ -58,6 +64,13 @@ export default class GameField {
   /* eslint-disable class-methods-use-this */
   swapPuzzle(puzzle1, puzzle2) {
     console.log(puzzle1, puzzle2);
+
+    const innerPuzzleIndex = puzzle1.index;
+    /* eslint-disable no-param-reassign */
+    puzzle1.index = puzzle2.index;
+    /* eslint-disable no-param-reassign */
+    puzzle2.index = innerPuzzleIndex;
+
     let puz1Index = 0;
     let puz2Index = 0;
     for (let i = 0; i < this.size ** 2; i += 1) {
@@ -66,29 +79,13 @@ export default class GameField {
     }
     this.gameField.splice(puz1Index, 1, puzzle2);
     this.gameField.splice(puz2Index, 1, puzzle1);
-
-    // this.gameField.forEach((elem, i) => {
-    //   if (elem === puzzle1) {
-    //     this.gameField.splice(i, 1, '0');
-    //     console.log(this.gameField);
-    //   } else if (elem === puzzle2) {
-    //     this.gameField.splice(i, 1, `${puzzle2.value}`);
-    //     console.log(this.gameField);
-    //   }
-    // });
-    // this.gameField.sort((a, b) => a.index - b.index);
-    // this.gameField.forEach((elem) => elem.setPosition());
-    // const { index } = puzzle1;
-    // const { value } = puzzle1;
-    // /* eslint-disable no-param-reassign */
-    // puzzle1.index = puzzle2.index;
-    // puzzle1.value = puzzle2.value;
-    // puzzle2.index = index;
-    // puzzle2.value = value;
+    this.reCalcIndexes();
   }
 
   findNeighbour() {
     const [k1, k2] = this.findElem(0).position;
+    /* eslint-disable no-return-assign */
+    this.gameField.forEach((elem) => (elem.isMoveble = false));
     // console.log(k1, k2);
     if (k1 === 0) {
       this.changeMoveble(k1 + 1, k2);
@@ -110,6 +107,10 @@ export default class GameField {
     if (k2 === 2) {
       this.changeMoveble(k1, k2 - 1);
     }
+  }
+
+  reCalcIndexes() {
+    this.gameField.forEach((elem) => elem.setPosition());
   }
 
   changeMoveble(k1, k2) {

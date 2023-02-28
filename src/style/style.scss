@@ -43,6 +43,20 @@ body {
   font-size: 20px;
 }
 
+.game__type{
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  justify-content: center;
+  font-size: 20px;
+  padding-bottom: 10px;
+  color: blue;
+  & :hover{
+    cursor: pointer;
+  }
+}
+
+
 .clickNumber {
   width: 150px;
   height: 40px;

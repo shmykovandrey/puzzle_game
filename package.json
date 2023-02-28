@@ -5,7 +5,8 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx webpack serve --open"
+    "dev": "npx webpack serve --open",
+    "fix": "npx eslint --fix"
   },
   "repository": {
     "type": "git",
