@@ -22,7 +22,10 @@ export default class Game {
 
   setEventClickOnGameField() {
     const gameFieldTag = document.querySelector('.game-field');
-    gameFieldTag.addEventListener('click', this.gameField.clickOnField.bind(this.gameField));
+    const newGameFieldTag = gameFieldTag.cloneNode(true);
+    gameFieldTag.parentNode.replaceChild(newGameFieldTag, gameFieldTag);
+
+    newGameFieldTag.addEventListener('click', this.gameField.clickOnField.bind(this));
   }
 
   startTimer() {
@@ -30,8 +33,6 @@ export default class Game {
     this.timerIntervalId = setInterval(() => {
       this.updateTimer();
       this.time += 1;
-      /* eslint-disable no-console */
-      console.log(this.gameField);
     }, 1000);
   }
 

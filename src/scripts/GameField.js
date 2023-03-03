@@ -53,14 +53,15 @@ export default class GameField {
   clickOnField(event) {
     if (event.target.classList.value.split(' ').indexOf('canMove') !== -1) {
       /* eslint-disable no-console */
-      this.clickNumber += 1;
-      const nullElem = this.findElem(0);
-      const targetElem = this.findElem(event.target.textContent);
+      console.log(this.turn);
+      this.turn += 1;
+      const nullElem = this.gameField.findElem(0);
+      const targetElem = this.gameField.findElem(event.target.textContent);
       console.log(this.gameField);
-      this.swapPuzzle(nullElem, targetElem);
-      this.findNeighbour();
+      this.gameField.swapPuzzle(nullElem, targetElem);
+      this.gameField.findNeighbour();
       //   this.logField();
-      this.drowField();
+      this.gameField.drowField();
     }
   }
 
