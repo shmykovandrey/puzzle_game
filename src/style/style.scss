@@ -16,22 +16,61 @@ body {
   margin: 0 auto;
 }
 
-.game-field {
+.game-size__3 {
   width: 240px;
   height: 240px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+
+
+  & .puzzle {
+    width: 80px;
+    height: 80px;
+    padding-top: 25px;
+    background-color: #a1a1a1;
+    text-align: center;
+    border: 1px solid black;
+    font-size: 25px;
+  }
 }
 
-.puzzle {
-  width: 80px;
-  height: 80px;
-  padding-top: 25px;
-  background-color: #a1a1a1;
-  text-align: center;
-  border: 1px solid black;
-  font-size: 25px;
+.game-size__4 {
+  width: 320px;
+  height: 320px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+
+
+  & .puzzle {
+    width: 80px;
+    height: 80px;
+    padding-top: 25px;
+    background-color: #a1a1a1;
+    text-align: center;
+    border: 1px solid black;
+    font-size: 25px;
+  }
+}
+
+.game-size__5 {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+
+
+  & .puzzle {
+    width: 80px;
+    height: 80px;
+    padding-top: 25px;
+    background-color: #a1a1a1;
+    text-align: center;
+    border: 1px solid black;
+    font-size: 25px;
+  }
 }
 
 .timer {
@@ -43,7 +82,7 @@ body {
   font-size: 20px;
 }
 
-.game__type{
+.game__type {
   display: flex;
   flex-direction: row;
   column-gap: 15px;
@@ -51,7 +90,8 @@ body {
   font-size: 20px;
   padding-bottom: 10px;
   color: blue;
-  & :hover{
+
+  & :hover {
     cursor: pointer;
   }
 }

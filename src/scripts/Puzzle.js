@@ -10,9 +10,4 @@ export default class Puzzle {
   setPosition() {
     this.position = [Math.floor(this.index / this.fieldSize), this.index % this.fieldSize];
   }
-
-  loger() {
-    /* eslint-disable no-console */
-    console.log(this.position, this.value);
-  }
 }

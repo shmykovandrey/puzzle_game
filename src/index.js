@@ -2,5 +2,7 @@ import './style/style.scss';
 
 import Game from './scripts/Game';
 
-const game = new Game();
-game.generateGameField();
+window.onload = () => {
+  const game = new Game();
+  game.startGame();
+};

@@ -1,25 +1,34 @@
 import GameField from './GameField';
 
 export default class Game {
-  constructor(size = 3) {
+  constructor() {
     this.time = 0;
     this.turn = 0;
-    this.size = size;
-    this.setGameType();
-    this.updateTimer();
+    this.size = 4;
+    this.setGameSelectClick();
+  }
+
+  startGame() {
+    this.setGameTypeTitle();
+    this.startTimer();
     this.startDrowClickNumber();
+    this.generateGameField();
   }
 
   generateGameField() {
-    this.game = new GameField(this.size);
-    this.startTimer();
+    this.gameField = new GameField(this.size);
   }
 
   startTimer() {
-    setInterval(() => {
-      this.time += 1;
+    this.updateTimer();
+    this.timerIntervalId = setInterval(() => {
       this.updateTimer();
+      this.time += 1;
     }, 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.timerIntervalId);
   }
 
   updateTimer() {
@@ -29,7 +38,7 @@ export default class Game {
 
   drowClickNumber() {
     const clickNumberField = document.querySelector('.clickNumber');
-    clickNumberField.textContent = `Move: ${this.game.clickNumber}`;
+    clickNumberField.textContent = `Move: ${this.turn}`;
   }
 
   startDrowClickNumber() {
@@ -38,25 +47,33 @@ export default class Game {
     }, 100);
   }
 
-  setGameType() {
+  setGameTypeTitle() {
     const setTimeTag = document.querySelector('.game-title');
     setTimeTag.textContent = `Game Type ${this.size}x${this.size}`;
-    const selectGameType = document.querySelector('.game__type');
-    selectGameType.addEventListener('click', (e) => {
-      Game.gameSelection(e);
-    });
   }
-  /* eslint-disable no-console */
 
-  static gameSelection(event) {
+  setGameSelectClick() {
+    const gameTypeTag = document.querySelector('.game__type');
+    gameTypeTag.addEventListener('click', this.selectGameType.bind(this));
+  }
+
+  gameReload(size) {
+    this.size = size;
+    this.stopTimer();
+    this.time = 0;
+    this.turn = 0;
+    this.startGame();
+  }
+
+  selectGameType(event) {
     if (event.target.textContent[0] === '3') {
-      console.log('3');
+      this.gameReload(3);
     }
     if (event.target.textContent[0] === '4') {
-      console.log('4');
+      this.gameReload(4);
     }
     if (event.target.textContent[0] === '5') {
-      console.log('5');
+      this.gameReload(5);
     }
   }
 }

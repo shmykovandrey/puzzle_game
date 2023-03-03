@@ -13,6 +13,13 @@ export default class GameField {
   mixedData() {
     let res = [];
     if (this.size === 3) res = [1, 2, 3, 4, 5, 6, 7, 8].sort(() => Math.random() - 0.5);
+    /* eslint-disable max-len */
+    if (this.size === 4) res = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(() => Math.random() - 0.5);
+    if (this.size === 5) {
+      res = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+      ].sort(() => Math.random() - 0.5);
+    }
     res.push(0);
     return res.reverse();
   }
@@ -36,6 +43,8 @@ export default class GameField {
 
   drowField() {
     const gameFieldTag = document.querySelector('.game-field');
+    gameFieldTag.classList = 'game-field';
+    gameFieldTag.classList.add(`game-size__${this.size}`);
     gameFieldTag.innerHTML = '';
     for (let i = 0; i < this.size ** 2; i += 1) {
       const divPuzzle = document.createElement('div');
@@ -86,26 +95,27 @@ export default class GameField {
     const [k1, k2] = this.findElem(0).position;
     /* eslint-disable no-return-assign */
     this.gameField.forEach((elem) => (elem.isMoveble = false));
-    // console.log(k1, k2);
+    /* eslint-disable no-console */
+    console.log(k1, k2);
     if (k1 === 0) {
       this.changeMoveble(k1 + 1, k2);
     }
-    if (k1 === 1) {
+    if (k1 === this.size - 1) {
+      this.changeMoveble(k1 - 1, k2);
+    }
+    if (k1 !== 0 && k1 !== this.size - 1) {
       this.changeMoveble(k1 - 1, k2);
       this.changeMoveble(k1 + 1, k2);
-    }
-    if (k1 === 2) {
-      this.changeMoveble(k1 - 1, k2);
     }
     if (k2 === 0) {
       this.changeMoveble(k1, k2 + 1);
     }
-    if (k2 === 1) {
+    if (k2 === this.size - 1) {
+      this.changeMoveble(k1, k2 - 1);
+    }
+    if (k2 !== 0 && k2 !== this.size - 1) {
       this.changeMoveble(k1, k2 - 1);
       this.changeMoveble(k1, k2 + 1);
-    }
-    if (k2 === 2) {
-      this.changeMoveble(k1, k2 - 1);
     }
   }
 
@@ -129,11 +139,5 @@ export default class GameField {
       }
     }
     return null;
-  }
-
-  logField() {
-    /* eslint-disable no-console */
-    console.log(this.gameField);
-    /* eslint-enable no-console */
   }
 }
