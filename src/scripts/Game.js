@@ -13,10 +13,16 @@ export default class Game {
     this.startTimer();
     this.startDrowClickNumber();
     this.generateGameField();
+    this.setEventClickOnGameField();
   }
 
   generateGameField() {
     this.gameField = new GameField(this.size);
+  }
+
+  setEventClickOnGameField() {
+    const gameFieldTag = document.querySelector('.game-field');
+    gameFieldTag.addEventListener('click', this.gameField.clickOnField.bind(this.gameField));
   }
 
   startTimer() {
@@ -24,6 +30,8 @@ export default class Game {
     this.timerIntervalId = setInterval(() => {
       this.updateTimer();
       this.time += 1;
+      /* eslint-disable no-console */
+      console.log(this.gameField);
     }, 1000);
   }
 

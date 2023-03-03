@@ -4,7 +4,7 @@ export default class GameField {
   constructor(size) {
     this.size = size;
     this.clickNumber = 0;
-    this.addClickEvent();
+
     this.generateField();
     this.findNeighbour();
     this.drowField();
@@ -25,6 +25,7 @@ export default class GameField {
   }
 
   generateField() {
+    // const gameFieldTag = document.querySelector('.game-field');
     const arr = [];
     const puzzle3Field = this.mixedData();
     for (let i = 0; i < this.size ** 2; i += 1) {
@@ -32,13 +33,6 @@ export default class GameField {
       arr.push(newPuzzle);
     }
     this.gameField = arr;
-  }
-
-  addClickEvent() {
-    const gameFieldTag = document.querySelector('.game-field');
-    gameFieldTag.addEventListener('click', (e) => {
-      this.clickOnField(e);
-    });
   }
 
   drowField() {
@@ -96,7 +90,6 @@ export default class GameField {
     /* eslint-disable no-return-assign */
     this.gameField.forEach((elem) => (elem.isMoveble = false));
     /* eslint-disable no-console */
-    console.log(k1, k2);
     if (k1 === 0) {
       this.changeMoveble(k1 + 1, k2);
     }
